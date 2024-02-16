@@ -1,41 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?><root><TimeStamp Value="JZmm2JzPaCn9Ug=="/>
-    <License id="Terms">
-        <MachineBindings>
-            <Binding Key="1" Value="00330-50000-00000-AAOEM"/>
-            <Binding Key="2" Value="00000_00_000000_00_00062B_77_8F48BA_E5.5"/>
-            <Binding Key="4" Value="RGVmYXVsdCBzdHJpbmc="/>
-            <Binding Key="5" Value="74:56:3c:37:a1:f3"/>
-        </MachineBindings>
-        <MachineID Value="WN/UK1NNMQbsApE/cemHrYZKbAA="/>
-        <SerialHash Value="54d989c55afca1fa676f92f584d8f9b0a434e4ae"/>
-        <Features>
-            <Feature Value="33"/>
-            <Feature Value="1"/>
-            <Feature Value="12"/>
-            <Feature Value="2"/>
-            <Feature Value="24"/>
-            <Feature Value="3"/>
-            <Feature Value="36"/>
-            <Feature Value="17"/>
-            <Feature Value="19"/>
-            <Feature Value="62"/>
-            <Feature Value="60"/>
-        </Features>
-        <DeveloperData Value="AQAAAEY0LUJVUUMtVjlNVi1KTjVKLUFWSEstNlJLWg=="/>
-        <SerialMasked Value="F4-BUQC-V9MV-JN5J-AVHK-XXXX"/>
-        <StartDate Value="2022-04-10T00:00:00"/>
-        <StopDate Value="2024-03-18T12:02:13"/>
-        <UpdateDate Value="2024-02-17T11:02:13"/>
-        <InitialActivationDate Value="2022-04-10T13:44:16"/>
-        <LicenseVersion Value="6.x"/>
-        <ClientProvidedVersion Value="2017.2.0"/>
-        <AlwaysOnline Value="false"/>
-        <Entitlements>
-            <Entitlement Ns="unity_editor" Tag="UnityPersonal" Type="EDITOR" ValidTo="9999-12-31T00:00:00"/>
-            <Entitlement Ns="unity_editor" Tag="DarkSkin" Type="EDITOR_FEATURE" ValidTo="9999-12-31T00:00:00"/>
-        </Entitlements>
-    </License><Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><Reference URI="#Terms"><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><DigestValue>wp5DxPb38g/a1VvHxWeOboxLV2A=</DigestValue></Reference></SignedInfo><SignatureValue>UjyBYGwEG4ITbA6qQ3SQY4+bHxSRFif9GGIgvF06oq4WjhxTqdGgQXtPDE86mp9S0erBqbaio6dJ
-js4MfaTEiHQxL3Xs11LD5/3D+rgBPN09seljMq4ggo8wMNq3fwLaVmGCIu7di5wHmnqX5th1JVSm
-FHllEnQ+qndPvDkILzN5uk+2nFZVPhkA3cfmOrnfM4SjkodylqIrsxmLQE6vFqt5zQrOhNT7Ow8j
-nLR7KbCBok58fqRftc2kXM/Y84fji9zClSDCVEy6pWYYHMGYcDeCLBqCHi8MOEMlfrAzhCOge8ct
-pE5DuoDtdnQSOUEUyqnfquMNGZ8DaSeUYeShMQ==</SignatureValue></Signature></root>
+name: Get Unity license activation file 🔐
+
+on: workflow_dispatch
+
+jobs:
+  requestManualActivationFile:
+    name: Request manual activation file 🔑
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: game-ci/unity-request-activation-file@v2
+        id: getManualLicenseFile
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Manual Activation File
+          path: ${{ steps.getManualLicenseFile.outputs.filePath }}
